@@ -1,0 +1,38 @@
+{
+  "lookup": {
+    "rules": {
+      "[{\"prev_action\": {\"action_name\": \"action_listen\"}, \"user\": {\"intent\": \"qr_show\"}}]": "utter_qr_show",
+      "[{\"prev_action\": {\"action_name\": \"action_listen\"}, \"user\": {\"intent\": \"qr_show\"}}, {\"prev_action\": {\"action_name\": \"utter_qr_show\"}, \"user\": {\"intent\": \"qr_show\"}}]": "action_listen",
+      "[{\"prev_action\": {\"action_name\": \"action_listen\"}, \"user\": {\"intent\": \"ask_qr\"}}]": "utter_ask_qr",
+      "[{\"prev_action\": {\"action_name\": \"action_listen\"}, \"user\": {\"intent\": \"ask_qr\"}}, {\"prev_action\": {\"action_name\": \"utter_ask_qr\"}, \"user\": {\"intent\": \"ask_qr\"}}]": "action_listen",
+      "[{\"prev_action\": {\"action_name\": \"action_listen\"}, \"user\": {\"intent\": \"ask_network_issue\"}}]": "action_ask_network_issue",
+      "[{\"prev_action\": {\"action_name\": \"action_listen\"}, \"user\": {\"intent\": \"ask_network_issue\"}}, {\"prev_action\": {\"action_name\": \"action_ask_network_issue\"}, \"user\": {\"intent\": \"ask_network_issue\"}}]": "action_listen",
+      "[{\"prev_action\": {\"action_name\": \"action_listen\"}, \"user\": {\"intent\": \"ok\"}}]": "utter_ok",
+      "[{\"prev_action\": {\"action_name\": \"action_listen\"}, \"user\": {\"intent\": \"ok\"}}, {\"prev_action\": {\"action_name\": \"utter_ok\"}, \"user\": {\"intent\": \"ok\"}}]": "action_listen",
+      "[{\"prev_action\": {\"action_name\": \"action_listen\"}, \"user\": {\"intent\": \"ask_user_id_password\"}}]": "utter_ask_user_id_password",
+      "[{\"prev_action\": {\"action_name\": \"action_listen\"}, \"user\": {\"intent\": \"ask_user_id_password\"}}, {\"prev_action\": {\"action_name\": \"utter_ask_user_id_password\"}, \"user\": {\"intent\": \"ask_user_id_password\"}}]": "action_listen",
+      "[{\"prev_action\": {\"action_name\": \"action_listen\"}, \"user\": {\"intent\": \"qr_not_show\"}}]": "utter_qr_not_show",
+      "[{\"prev_action\": {\"action_name\": \"action_listen\"}, \"user\": {\"intent\": \"qr_not_show\"}}, {\"prev_action\": {\"action_name\": \"utter_qr_not_show\"}, \"user\": {\"intent\": \"qr_not_show\"}}]": "action_listen"
+    },
+    "rule_only_slots": [],
+    "rule_only_loops": [],
+    "rules_for_loop_unhappy_path": {},
+    "rules_not_in_stories": [
+      "[{\"prev_action\": {\"action_name\": \"action_listen\"}, \"user\": {\"intent\": \"qr_show\"}}, {\"prev_action\": {\"action_name\": \"utter_qr_show\"}, \"user\": {\"intent\": \"qr_show\"}}]",
+      "[{\"prev_action\": {\"action_name\": \"action_listen\"}, \"user\": {\"intent\": \"ask_qr\"}}]",
+      "[{\"prev_action\": {\"action_name\": \"action_listen\"}, \"user\": {\"intent\": \"qr_not_show\"}}]",
+      "predicting default action with intent restart",
+      "[{\"prev_action\": {\"action_name\": \"action_listen\"}, \"user\": {\"intent\": \"ask_qr\"}}, {\"prev_action\": {\"action_name\": \"utter_ask_qr\"}, \"user\": {\"intent\": \"ask_qr\"}}]",
+      "[{\"prev_action\": {\"action_name\": \"action_listen\"}, \"user\": {\"intent\": \"ask_user_id_password\"}}, {\"prev_action\": {\"action_name\": \"utter_ask_user_id_password\"}, \"user\": {\"intent\": \"ask_user_id_password\"}}]",
+      "[{\"prev_action\": {\"action_name\": \"action_listen\"}, \"user\": {\"intent\": \"ok\"}}, {\"prev_action\": {\"action_name\": \"utter_ok\"}, \"user\": {\"intent\": \"ok\"}}]",
+      "[{\"prev_action\": {\"action_name\": \"action_listen\"}, \"user\": {\"intent\": \"ask_user_id_password\"}}]",
+      "[{\"prev_action\": {\"action_name\": \"action_listen\"}, \"user\": {\"intent\": \"ok\"}}]",
+      "[{\"prev_action\": {\"action_name\": \"action_listen\"}, \"user\": {\"intent\": \"qr_not_show\"}}, {\"prev_action\": {\"action_name\": \"utter_qr_not_show\"}, \"user\": {\"intent\": \"qr_not_show\"}}]",
+      "predicting default action with intent session_start",
+      "predicting default action with intent back",
+      "[{\"prev_action\": {\"action_name\": \"action_listen\"}, \"user\": {\"intent\": \"ask_network_issue\"}}, {\"prev_action\": {\"action_name\": \"action_ask_network_issue\"}, \"user\": {\"intent\": \"ask_network_issue\"}}]",
+      "[{\"prev_action\": {\"action_name\": \"action_listen\"}, \"user\": {\"intent\": \"ask_network_issue\"}}]",
+      "[{\"prev_action\": {\"action_name\": \"action_listen\"}, \"user\": {\"intent\": \"qr_show\"}}]"
+    ]
+  }
+}

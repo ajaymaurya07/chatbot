@@ -1,0 +1,152 @@
+
+version: "3.1"
+nlu:
+- intent: greet
+  examples: |
+    - hi
+    - hello
+    - hlo
+    - hey
+    - hey bot
+    - namaste
+    - namste
+    - नमस्ते
+    - हेलो
+    - हाय
+    - सुनो
+    - कोई है?
+    - koi hai?
+    - are you there
+    - bro
+    - bhai
+    - assistant
+    - help
+    - हेल्प
+    - जी
+    - hello ji
+    - हेलो जी
+    - अबे सुन
+    - suniye
+    - suno
+    - ji
+    - eee
+    - dddd
+    - xnx
+    - jjss
+    - aaaa
+    - कुछ भी
+    - kuch bhi
+    - start
+    - शुरू
+    - shuru
+
+
+
+- intent: goodbye
+  examples: |
+    - bye
+    - धन्यवाद
+    - अलविदा
+
+- intent: switch_project
+  examples: |
+    - panchayat gateway
+    - पंचायत गेटवे
+    - ims
+    - आईएमएस
+    - इन्वेंटरी और संपत्ति प्रबंधन
+    - inventory asset management
+    - inventory management
+
+- intent: reset_project
+  examples: |
+    - reset
+
+
+
+# for cummon project
+
+- intent: forget_password
+  examples: |
+    - password bhool gaya
+    - user id bhool gaya
+    - user id aur password bhool gaya
+    - forgot my password
+    - forgot my user id
+    - lost my password
+    - lost my user id
+    - forget user id and password
+    - lost user id and password
+    - password yaad nhi h
+    - यूज़र आईडी भूल गया
+    - पासवर्ड भूल गया
+
+
+
+# for panchayat gateway
+
+- intent: geo_fence
+  examples: |
+    - geo fencing problem
+    - geofence problem
+    - my app shows geo fencing issue
+    - geofencing issue
+    - geo fencing issue
+    - geo-fencing issue
+    - geo fence me problem
+    - geo fence me dikkat h
+    - geo fence me issue hai
+    - geo fence error in app
+    - geo fencing not working
+    - जियो फेंस में समस्या है
+    
+
+- intent: ask_face_match
+  examples: |
+    - face not match
+    - my face is not matching
+    - face mismatch
+    - face did not match
+    - face doesn’t match
+    - face detection failed
+    - face authentication failed
+    - face recognition not working
+    - my face is not detected
+    - face not recognized
+    - face verification failed
+    - face not verified
+    - my face didn’t match the record
+    - face not accepted
+    - chehra match nhi kar rha h
+    - चेहरा मेल नहीं खाता
+    - चेहरा मैच नहीं कर रहा है
+    - फेस नॉट मैच
+
+- intent: ask_network_issue
+  examples: |
+    - network issue
+    - net work issue
+    - internet not working
+    - app not connecting
+    - no internet
+    - app bol raha hai please check your connection
+    - network ka issue aa raha hai
+    - network error likh ke aa raha hai
+    - session timeout
+    - session time out
+    - my session expired
+    - app me session timeout likh ke aa raha hai
+    - session over likh ke aa raha hai
+    - app session end kar deta hai
+    - session expired issue
+    - नेटवर्क समस्या
+
+
+- intent: ask_qr
+  examples: |
+    - qr scan problem
+    - i am unable to scan qr
+    - qr not scan
+    - qr issue
+    - qr scan nhi kar p rha hu
+    - क्यूआर समस्या

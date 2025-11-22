@@ -1,0 +1,92 @@
+#version: "3.1"
+#stories:
+#
+#- story: user inside Panchayat Bhawan and solved
+#  steps:
+#    - intent: ask_location
+#    - action: utter_ask_location
+#    - intent: affirm
+#    - action: utter_inside_yes
+#    - intent: problem_solved
+#    - action: utter_thanks
+#
+#- story: user inside Panchayat Bhawan but not solved
+#  steps:
+#    - intent: ask_location
+#    - action: utter_ask_location
+#    - intent: affirm
+#    - action: utter_inside_yes
+#    - intent: problem_not_solved
+#    - action: utter_update_data
+#    - action: utter_thanks
+#
+#- story: user outside Panchayat Bhawan
+#  steps:
+#    - intent: ask_location
+#    - action: utter_ask_location
+#    - intent: deny
+#    - action: utter_inside_no
+#    - action: utter_thanks
+#
+#
+#
+#- story: face status active (1)
+#  steps:
+#    - intent: ask_face_match
+#    - action: utter_ask_face_match
+#    - intent: image_show
+#    - action: utter_image_show
+#    - intent: face_status_1
+#    - action: utter_face_status_1
+#    - action: utter_thanks
+#
+#
+#- story: face status inactive (0)
+#  steps:
+#    - intent: ask_face_match
+#    - action: utter_ask_face_match
+#    - intent: image_show
+#    - action: utter_image_show
+#    - intent: face_status_0
+#    - action: utter_face_status_0
+#    - action: utter_thanks
+#
+#
+#- story: face image not showing
+#  steps:
+#    - intent: ask_face_match
+#    - action: utter_ask_face_match
+#    - intent: image_not_show
+#    - action: utter_image_not_show
+#    - action: utter_thanks
+#
+#
+#
+
+#version: "3.1"
+#
+#stories:
+#
+## ये दो stories डाल दो (बाकी stories भी वही रख सकते हो)
+#
+#- story: forget password when project is panchayat
+#  steps:
+#  - intent: forget_password
+#  - slot_was_set:
+#    - project: panchayat
+#  - action: utter_forget_password_panchayat
+#
+#- story: forget password when project is ims
+#  steps:
+#  - intent: forget_password
+#  - slot_was_set:
+#    - project: ims
+#  - action: utter_forget_password_ims
+#
+## Optional: अगर project none हो तो पूछ लो
+#- story: ask project if forget password but no project selected
+#  steps:
+#  - intent: forget_password
+#  - slot_was_set:
+#    - project: none
+#  - action: utter_ask_project

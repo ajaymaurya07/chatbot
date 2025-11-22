@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>vdai AI chatbot</title>
+  <style>
+  /* 🌤️ Basic Layout */
+  body {
+    font-family: "Segoe UI", Arial, sans-serif;
+    background: #eef1f5;
+    margin: 0;
+    height: 100vh;
+    overflow: hidden;
+  }
+
+  /* 💬 Floating Chat Icon */
+  #chat-toggle {
+    position: fixed;
+    bottom: 25px;
+    right: 25px;
+    background: #007bff;
+    color: white;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.25);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    font-size: 28px;
+    transition: all 0.3s ease;
+    z-index: 999;
+  }
+
+  #chat-toggle:hover {
+    background: #0056b3;
+    transform: scale(1.05);
+  }
+
+  /* 💬 Chat Window */
+  #chat-container {
+    position: fixed;
+    bottom: 90px;
+    right: 25px;
+    width: 380px;
+    height: 520px;
+    background: #ffffff;
+    border-radius: 15px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    display: none;
+    flex-direction: column;
+    overflow: hidden;
+    z-index: 1000;
+    animation: slideUp 0.3s ease;
+  }
+
+  @keyframes slideUp {
+    from { transform: translateY(30px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+  }
+
+  /* 🧭 Header Bar */
+  #chat-header {
+    background: linear-gradient(135deg, #007bff, #4a90e2);
+    color: white;
+    padding: 15px;
+    text-align: center;
+    font-weight: 600;
+    font-size: 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    letter-spacing: 0.5px;
+  }
+
+  #close-chat {
+    cursor: pointer;
+    font-size: 20px;
+    color: white;
+  }
+
+  /* 💬 Messages Area */
+  #messages {
+    flex: 1;
+    padding: 15px;
+    overflow-y: auto;
+    background: #f7f8fa;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* 🗨️ Message Bubbles */
+  .message {
+    margin: 8px 0;
+    padding: 10px 14px;
+    border-radius: 14px;
+    max-width: 80%;
+    font-size: 14px;
+    line-height: 1.4;
+    word-wrap: break-word;
+    display: inline-block;
+  }
+
+  .user {
+ background: #a7d8ff; /* light sky blue */
+  color: #0a2540; /* deep navy text */
+    align-self: flex-end;
+    border-top-right-radius: 0;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  }
+
+  .bot {
+    background: #e9ecef;
+    color: #111;
+    align-self: flex-start;
+    border-top-left-radius: 0;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  }
+
+  /* 🖼️ Chat Images */
+  .chat-image {
+    max-width: 80%;
+    border-radius: 10px;
+    margin: 6px 0 4px;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.15);
+    cursor: pointer;
+  }
+
+  /* 🔘 Bot Buttons */
+  .bot-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 6px;
+  }
+
+  .bot-buttons button {
+    padding: 6px 12px;
+    border-radius: 8px;
+    border: 1px solid #007bff;
+    background: #f0f6ff;
+    color: #007bff;
+    cursor: pointer;
+    font-size: 13px;
+    transition: all 0.2s ease;
+  }
+
+  .bot-buttons button:hover {
+    background: #007bff;
+    color: white;
+  }
+
+  /* ✏️ Input Area */
+  #input-container {
+    display: flex;
+    border-top: 1px solid #ddd;
+    background: #fff;
+    padding: 5px;
+  }
+
+  #user-input {
+    flex: 1;
+    border: none;
+    padding: 12px;
+    font-size: 14px;
+    border-radius: 8px;
+    outline: none;
+    background: #f2f4f7;
+    margin-right: 6px;
+  }
+
+  #send-btn {
+    background: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: 0.3s ease;
+  }
+
+  #send-btn:hover {
+    background: #0056b3;
+  }
+
+  #send-btn:disabled, #user-input:disabled {
+    background: #ccc;
+    cursor: not-allowed;
+  }
+
+  /* 🎯 Scrollbar Style */
+  #messages::-webkit-scrollbar {
+    width: 6px;
+  }
+  #messages::-webkit-scrollbar-thumb {
+    background-color: rgba(0,0,0,0.2);
+    border-radius: 10px;
+  }
+  #mic-btn {
+  background: #ff4747;
+  color: white;
+  border: none;
+  padding: 10px 14px;
+  border-radius: 50%;
+  cursor: pointer;
+  margin-right: 6px;
+  font-size: 18px;
+  transition: 0.2s;
+}
+
+#mic-btn.recording {
+  background: #ff0000;
+  transform: scale(1.1);
+}
+/* 🔴 Mic Recording Animation */
+#mic-btn.recording {
+  background: #ff3b30;
+  box-shadow: 0 0 10px #ff3b30, 0 0 20px #ff3b30;
+  animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+  0%   { transform: scale(1); }
+  50%  { transform: scale(1.15); }
+  100% { transform: scale(1); }
+}
+
+/* 🎧 Listening text blink */
+#recording-label {
+  display: none;
+  color: red;
+  font-size: 12px;
+  margin-left: 6px;
+  font-weight: bold;
+  animation: blinkText 1s infinite;
+}
+
+@keyframes blinkText {
+  0% { opacity: 0.2; }
+  50% { opacity: 1; }
+  100% { opacity: 0.2; }
+}
+
+
+
+
+<!--    /* 💬 Typing Indicator Style */-->
+<!--.typing-indicator {-->
+<!--  display: flex;-->
+<!--  align-items: center;-->
+<!--  background: #e9ecef;-->
+<!--  color: #000;-->
+<!--  border-radius: 12px;-->
+<!--  padding: 8px 12px;-->
+<!--  margin: 8px 0;-->
+<!--  align-self: flex-start;-->
+<!--  width: fit-content;-->
+<!--  box-shadow: 0 2px 4px rgba(0,0,0,0.1);-->
+<!--}-->
+
+<!--.typing-indicator span {-->
+<!--  height: 8px;-->
+<!--  width: 8px;-->
+<!--  background-color: #007bff;-->
+<!--  border-radius: 50%;-->
+<!--  margin: 0 3px;-->
+<!--  display: inline-block;-->
+<!--  animation: blink 1.4s infinite both;-->
+<!--}-->
+
+<!--.typing-indicator span:nth-child(2) {-->
+<!--  animation-delay: 0.2s;-->
+<!--}-->
+<!--.typing-indicator span:nth-child(3) {-->
+<!--  animation-delay: 0.4s;-->
+<!--}-->
+
+<!--@keyframes blink {-->
+<!--  0% { opacity: 0.2; }-->
+<!--  20% { opacity: 1; }-->
+<!--  100% { opacity: 0.2; }-->
+<!--}-->
+
+</style>
+
+</head>
+
+<body>
+
+  <!-- 🌟 Floating Chat Icon -->
+  <div id="chat-toggle">💬</div>
+
+  <!-- 🌟 Chat Window -->
+  <div id="chat-container">
+    <div id="chat-header">
+      Vdai AI Assistant
+      <span id="close-chat">✖</span>
+    </div>
+    <div id="messages"></div>
+    <div id="input-container">
+      <input type="text" id="user-input" placeholder="Type message..." onkeypress="if(event.key==='Enter') sendMessage();" />
+      <button id="mic-btn" class="mic-btn">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 1a3 3 0 0 0-3 3v6a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path>
+          <path d="M19 10a7 7 0 0 1-14 0"></path>
+          <line x1="12" y1="17" x2="12" y2="23"></line>
+          <line x1="8" y1="23" x2="16" y2="23"></line>
+        </svg>
+      </button>
+
+
+      <button id="send-btn" onclick="sendMessage();">Send</button>
+    </div>
+  </div>
+
+  <script>
+/* --------------------------------------- */
+/* CONFIGURATION */
+/* --------------------------------------- */
+const rasaUrl = "http://localhost:5005/webhooks/rest/webhook";
+
+/* --------------------------------------- */
+/* DOM ELEMENTS */
+/* --------------------------------------- */
+const messagesDiv = document.getElementById("messages");
+const userInput = document.getElementById("user-input");
+const sendBtn = document.getElementById("send-btn");
+const chatToggle = document.getElementById("chat-toggle");
+const chatContainer = document.getElementById("chat-container");
+const closeChat = document.getElementById("close-chat");
+const micBtn = document.getElementById("mic-btn");
+
+/* --------------------------------------- */
+/* STATE CONTROL */
+/* --------------------------------------- */
+let senderId = generateSenderId();
+let requestQueue = false;   // prevents spamming
+let isBotTyping = false;
+
+function generateSenderId() {
+  return "user_" + Date.now() + "_" + Math.floor(Math.random() * 99999);
+}
+
+/* --------------------------------------- */
+/* SESSION RESET */
+/* --------------------------------------- */
+async function restartConversation() {
+  try {
+    await fetch(`http://localhost:5005/conversations/${senderId}/tracker/events`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ event: "restart" })
+    });
+    console.log("🌀 Conversation restarted");
+  } catch (err) {
+    console.warn("⚠ Failed to restart:", err);
+  }
+}
+
+/* --------------------------------------- */
+/* CHAT OPEN */
+/* --------------------------------------- */
+chatToggle.onclick = async () => {
+  chatContainer.style.display = "flex";
+  messagesDiv.innerHTML = "";
+
+  senderId = generateSenderId(); // ensure FRESH session
+  await restartConversation();
+
+  addMessage("👋 Hello! I’m your vdai AI Assistant.\nनमस्ते! मैं आपका vdai एआई सहायक हूँ।", false);
+  addMessage("Which project would you like to talk about?\nआप किस प्रोजेक्ट के बारे में बात करना चाहेंगे?", false);
+};
+
+/* --------------------------------------- */
+/* CHAT CLOSE */
+/* --------------------------------------- */
+closeChat.onclick = () => {
+  chatContainer.style.display = "none";
+};
+
+/* --------------------------------------- */
+/* TYPING CONTROL */
+/* --------------------------------------- */
+function showTyping() {
+  if (isBotTyping) return null;
+
+  const typingDiv = document.createElement("div");
+  typingDiv.className = "typing-indicator";
+  typingDiv.innerHTML = `<span></span><span></span><span></span>`;
+  messagesDiv.appendChild(typingDiv);
+  messagesDiv.scrollTop = messagesDiv.scrollHeight;
+
+  isBotTyping = true;
+  return typingDiv;
+}
+
+function removeTyping(typingDiv) {
+  if (typingDiv && typingDiv.parentElement) {
+    typingDiv.parentElement.removeChild(typingDiv);
+  }
+  isBotTyping = false;
+}
+
+/* --------------------------------------- */
+/* MESSAGE RENDERING */
+/* --------------------------------------- */
+function addMessage(text, isUser = false, buttons = [], image = null) {
+  if (!text && !image) return;
+
+  const msg = document.createElement("div");
+  msg.className = `message ${isUser ? "user" : "bot"}`;
+  msg.innerHTML = text.replace(/\n/g, "<br>");
+  messagesDiv.appendChild(msg);
+
+  if (image) {
+    const img = document.createElement("img");
+    img.src = image;
+    img.className = "chat-image";
+    img.onclick = () => window.open(image, "_blank");
+    messagesDiv.appendChild(img);
+  }
+
+  if (buttons.length > 0) {
+    const btnContainer = document.createElement("div");
+    btnContainer.className = "bot-buttons";
+
+    buttons.forEach((b) => {
+      const btn = document.createElement("button");
+      btn.textContent = b.title;
+      btn.onclick = () => {
+        addMessage(b.title, true);
+        sendPayload(b.payload);
+        btnContainer.remove();
+      };
+      btnContainer.appendChild(btn);
+    });
+
+    messagesDiv.appendChild(btnContainer);
+    userInput.disabled = true;
+    sendBtn.disabled = true;
+  } else {
+    userInput.disabled = false;
+    sendBtn.disabled = false;
+  }
+
+  messagesDiv.scrollTop = messagesDiv.scrollHeight;
+}
+
+/* --------------------------------------- */
+/* SENDING USER MESSAGE */
+/* --------------------------------------- */
+sendBtn.onclick = sendMessage;
+
+async function sendMessage() {
+  const text = userInput.value.trim();
+  if (!text || requestQueue) return;
+
+  addMessage(text, true);
+  userInput.value = "";
+
+  await sendPayload(text);
+}
+
+/* --------------------------------------- */
+/* SEND PAYLOAD (MAIN FUNCTION) */
+/* --------------------------------------- */
+async function sendPayload(message) {
+  if (requestQueue) return;   // prevent spam
+  requestQueue = true;
+
+  const typingDiv = showTyping();
+
+  try {
+    const response = await fetch(rasaUrl, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ sender: senderId, message })
+    });
+
+    const data = await response.json();
+
+    removeTyping(typingDiv);
+
+    if (data?.length > 0) {
+      data.forEach((msg) => {
+        addMessage(msg.text || "", false, msg.buttons || [], msg.image || null);
+      });
+    } else {
+      addMessage("⚠️ No response from bot.", false);
+    }
+  } catch (err) {
+    removeTyping(typingDiv);
+    addMessage("⚠️ Network error: " + err.message, false);
+  }
+
+  requestQueue = false;
+}
+
+/* --------------------------------------- */
+/* SPEECH TO TEXT (SAFE MODE) */
+/* --------------------------------------- */
+const SpeechRecognition =
+  window.SpeechRecognition || window.webkitSpeechRecognition;
+
+if (SpeechRecognition) {
+  const recognition = new SpeechRecognition();
+  recognition.lang = "en-IN";
+  recognition.interimResults = false;
+
+  micBtn.addEventListener("click", () => {
+    micBtn.classList.add("recording");
+    recognition.start();
+  });
+
+  recognition.onresult = (event) => {
+    micBtn.classList.remove("recording");
+    userInput.value = event.results[0][0].transcript;
+  };
+
+  recognition.onerror = () => {
+    micBtn.classList.remove("recording");
+    addMessage(
+      "Sorry, I could not hear you.\nमाफ़ कीजिए, मैं आपकी आवाज़ सुन नहीं पाया।",
+      false
+    );
+  };
+} else {
+  micBtn.style.display = "none";
+}
+</script>
+
+
+
+</body>
+</html>
