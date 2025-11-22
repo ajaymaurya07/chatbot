@@ -1,17 +1,23 @@
-
-# Python
+# Python cache
 __pycache__/
 *.pyc
 
-# Virtual Environment
+# Virtual environment
 .venv/
 venv/
 
-# Rasa models
+# Rasa folders
 models/
+.rasa/
+.rasa/cache/
+.rasa/tmp*/
+
+# PyCharm / IntelliJ
+.idea/
+*.iml
 
 # Logs
 *.log
 
-# Cache
-.cache/
+# Training cache
+cache/
