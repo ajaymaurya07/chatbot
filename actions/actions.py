@@ -5,6 +5,35 @@ import random
 from rasa_sdk.events import SlotSet
 import requests
 
+class ActionVerifyUserID(Action):
+
+    def name(self):
+        return "action_provide_user_id"
+
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: dict):
+
+        user_id = tracker.get_slot("user_id")
+        print("📌 User entered ID:", user_id)
+
+        if not user_id:
+            dispatcher.utter_message(text="❗ User ID not found. Please try again.")
+            return []
+
+        # ---------------------------------------------------------
+        # 🔥 MOCK API VALIDATION (now)
+        # Real API: call API and check
+        # ---------------------------------------------------------
+        VALID_USER_IDS = ["test123", "maurya123", "123456"]
+
+        if user_id in VALID_USER_IDS:
+            dispatcher.utter_message(text=f"User ID verified: {user_id}")
+            dispatcher.utter_message(text="A reset link has been sent to your registered email.")
+        else:
+            dispatcher.utter_message(text="Invalid User ID. Please try again.")
+
+        return []
 
 
 class ActionAskNetworkIssue(Action):

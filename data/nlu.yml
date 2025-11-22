@@ -81,7 +81,12 @@ nlu:
     - यूज़र आईडी भूल गया
     - पासवर्ड भूल गया
 
-
+- intent: provide_user_id
+  examples: |
+    - my id is [123456](user_id)
+    - [maurya123](user_id)
+    - [test_user](user_id)
+    - user id [abc90](user_id)
 
 # for panchayat gateway
 

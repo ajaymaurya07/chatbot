@@ -6,14 +6,24 @@ session_config:
 
 slots:
   project:
-    type: categorical
+    type: categorical  #यह slot सिर्फ list में दिए गए values को ही accept करेगा।
     values:
       - panchayat
       - ims
     influence_conversation: true
     initial_value: null
     mappings:
-      - type: custom
+      - type: custom   #यह slot entity से खुद fill नहीं होगा,इसे manually action से fill करना पड़ेगा।
+
+  user_id:
+    type: text  #slot text value store करेगा
+    influence_conversation: true
+    mappings:
+      - type: from_entity   #Slot को बताता है कि user_id entity से value उठानी है
+        entity: user_id
+
+entities:
+  - user_id  # NLU को बताना कि user_id नाम की entity exist करती है
 
 intents:
   - greet
@@ -81,10 +91,9 @@ responses:
 
 
   # Forget Password
-  utter_forget_password_panchayat:
+  utter_enter_user_id:
     - text: |
-        No worries! Contact District Program Manager to recover your login credentials!
-        कोई चिंता नहीं! अपनी लॉगिन जानकारी पुनः प्राप्त करने के लिए जिला कार्यक्रम प्रबंधक से संपर्क करें!
+        Enter user id
 
   utter_forget_password_ims:
     - text: |
@@ -179,3 +188,4 @@ actions:
   - action_set_project
   - action_reset_project
   - action_ask_network_issue
+  - action_provide_user_id
