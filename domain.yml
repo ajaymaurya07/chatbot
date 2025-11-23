@@ -94,6 +94,7 @@ responses:
   utter_enter_user_id:
     - text: |
         Enter user id
+        यूज़र आईडी दर्ज करें
 
   utter_forget_password_ims:
     - text: |

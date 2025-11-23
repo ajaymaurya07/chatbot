@@ -18,20 +18,16 @@ class ActionVerifyUserID(Action):
         print("📌 User entered ID:", user_id)
 
         if not user_id:
-            dispatcher.utter_message(text="❗ User ID not found. Please try again.")
+            dispatcher.utter_message(text="❗ User ID not found. Please try again.\nयूज़र आईडी नहीं मिली। कृपया फिर से प्रयास करें")
             return []
 
         # ---------------------------------------------------------
-        # 🔥 MOCK API VALIDATION (now)
-        # Real API: call API and check
+        # real api call add here
         # ---------------------------------------------------------
-        VALID_USER_IDS = ["test123", "maurya123", "123456"]
 
-        if user_id in VALID_USER_IDS:
-            dispatcher.utter_message(text=f"User ID verified: {user_id}")
-            dispatcher.utter_message(text="A reset link has been sent to your registered email.")
-        else:
-            dispatcher.utter_message(text="Invalid User ID. Please try again.")
+        dispatcher.utter_message(text=f"User ID verified: {user_id}")
+        dispatcher.utter_message(
+            text="Your password has been forwarded to the District Program Manager (DPM).Please contact your DPM to recover your password.\nआपका पासवर्ड जिला कार्यक्रम प्रबंधक (DPM) को भेज दिया गया है।कृपया अपना पासवर्ड प्राप्त करने के लिए अपने DPM से संपर्क करें।")
 
         return []
 
