@@ -60,19 +60,6 @@ rules:
     - action: utter_ask_project
 
 
-#-------------------------------------------------------
-# great
-- rule: greet - No project selected
-  condition:
-    - slot_was_set:
-        - project: null
-  steps:
-    - intent: greet
-    - action: utter_ask_project
-
-
-
-
 
 
 # -----------------------------------------

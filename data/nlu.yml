@@ -1,53 +1,6 @@
 
 version: "3.1"
 nlu:
-- intent: greet
-  examples: |
-    - hi
-    - hello
-    - hlo
-    - hey
-    - hey bot
-    - namaste
-    - namste
-    - नमस्ते
-    - हेलो
-    - हाय
-    - सुनो
-    - कोई है?
-    - koi hai?
-    - are you there
-    - bro
-    - bhai
-    - assistant
-    - help
-    - हेल्प
-    - जी
-    - hello ji
-    - हेलो जी
-    - अबे सुन
-    - suniye
-    - suno
-    - ji
-    - eee
-    - dddd
-    - xnx
-    - jjss
-    - aaaa
-    - कुछ भी
-    - kuch bhi
-    - start
-    - शुरू
-    - shuru
-
-
-
-- intent: goodbye
-  examples: |
-    - bye
-    - धन्यवाद
-    - अलविदा
-
 - intent: switch_project
   examples: |
     - panchayat gateway
@@ -155,3 +108,92 @@ nlu:
     - qr issue
     - qr scan nhi kar p rha hu
     - क्यूआर समस्या
+
+
+
+
+- intent: greet
+  examples: |
+    - hello
+    - hi
+    - hey
+    - good morning
+    - good evening
+    - good afternoon
+    - greetings
+    - hello there
+    - hey bot
+    - hi assistant
+
+- intent: meaningless_input
+  examples: |
+    - llllll
+    - asdasd
+    - asdfgh
+    - asdfasdf
+    - dndn
+    - djdjdj
+    - sjsjjsj
+    - kjhkjh
+    - jdjdd
+    - hhhh
+    - hhhhhhh
+    - nknknkn
+    - zxczxc
+    - qwerty
+    - poiuyt
+    - mnbvcx
+    - kdfjghdf
+    - kjdfhgdfg
+    - ghghghgh
+    - jskajskaj
+    - testtesttest
+    - #$#$#$#
+    - ##$$
+    - @@@@@
+    - !!!!!!
+    - ????
+    - %%%%%%
+    - @#$@#$@#
+    - ........
+    - ;;;;;
+    - random
+    - gibberish
+    - nonsense
+    - blahblah
+    - blah blah
+    - ajksnjkas
+    - kjashdkjashd
+    - ajshdjkashdja
+    - lorem ipsum
+    - dsfsdfsdf
+    - skjdfhsdkfj
+    - jfhgjdfhg
+    - blahblahblah
+    - gibberish text
+    - whatttttt???
+    - whaaaat????
+    - yyyyyy
+    - ooooooo
+    - uuuuuuuuuu
+    - zzzzzzzz
+    - dhdfhdfh
+    - fjfjfjfj
+    - kjkjkjkj
+
+# Gratitude
+- intent: thank
+  examples: |
+    - thank you
+    - thanks
+    - appreciate it
+    - that’s helpful
+    - thank you so much
+    - thanks a lot
+    - dhanyabad
+
+- intent: goodbye
+  examples: |
+    - bye
+    - धन्यवाद
+    - अलविदा

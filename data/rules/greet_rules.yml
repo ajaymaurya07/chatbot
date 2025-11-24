@@ -1,0 +1,78 @@
+version: "3.1"
+
+rules:
+
+- rule: greet - No project selected
+  condition:
+    - slot_was_set:
+        - project: null
+  steps:
+    - intent: greet
+    - action: utter_ask_project
+
+- rule: greet - project selected (Panchayat)
+  condition:
+    - slot_was_set:
+        - project: panchayat
+  steps:
+    - intent: greet
+    - action: utter_greet
+
+- rule: greet - project selected (IMS)
+  condition:
+    - slot_was_set:
+        - project: ims
+  steps:
+    - intent: greet
+    - action: utter_greet
+
+
+
+- rule: meaning less input - No project selected
+  condition:
+    - slot_was_set:
+        - project: null
+  steps:
+    - intent: meaningless_input
+    - action: utter_ask_project
+
+- rule: meaning less input - project selected (Panchayat)
+  condition:
+    - slot_was_set:
+        - project: panchayat
+  steps:
+    - intent: meaningless_input
+    - action: utter_meaningless_input
+
+- rule: meaning less input - project selected (IMS)
+  condition:
+    - slot_was_set:
+        - project: ims
+  steps:
+    - intent: meaningless_input
+    - action: utter_meaningless_input
+
+
+- rule: thank - No project selected
+  condition:
+    - slot_was_set:
+        - project: null
+  steps:
+    - intent: thank
+    - action: utter_ask_project
+
+- rule: thank - project selected (Panchayat)
+  condition:
+    - slot_was_set:
+        - project: panchayat
+  steps:
+    - intent: thank
+    - action: utter_thanks
+
+- rule: thank - project selected (IMS)
+  condition:
+    - slot_was_set:
+        - project: ims
+  steps:
+    - intent: thank
+    - action: utter_thanks
