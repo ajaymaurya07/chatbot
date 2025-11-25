@@ -1,0 +1,50 @@
+version: "3.1"
+
+rules:
+
+- rule: Force project selection always
+  condition:
+    - slot_was_set:
+        - project: null
+  steps:
+    - action: utter_ask_project
+
+
+
+- rule: Handle project selection
+  steps:
+    - intent: switch_project
+    - action: action_set_project
+
+
+- rule: Reset project
+  steps:
+    - intent: reset_project
+    - action: action_reset_project
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

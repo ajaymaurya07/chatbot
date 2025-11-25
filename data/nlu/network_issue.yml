@@ -1,0 +1,22 @@
+
+version: "3.1"
+nlu:
+
+- intent: ask_network_issue
+  examples: |
+    - network issue
+    - net work issue
+    - internet not working
+    - app not connecting
+    - no internet
+    - app bol raha hai please check your connection
+    - network ka issue aa raha hai
+    - network error likh ke aa raha hai
+    - session timeout
+    - session time out
+    - my session expired
+    - app me session timeout likh ke aa raha hai
+    - session over likh ke aa raha hai
+    - app session end kar deta hai
+    - session expired issue
+    - नेटवर्क समस्या

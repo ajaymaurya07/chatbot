@@ -1,0 +1,16 @@
+version: "3.1"
+nlu:
+- intent: switch_project
+  examples: |
+    - panchayat gateway
+    - पंचायत गेटवे
+    - ims
+    - आईएमएस
+    - इन्वेंटरी और संपत्ति प्रबंधन
+    - inventory asset management
+    - inventory management
+
+- intent: reset_project
+  examples: |
+    - reset
+    - reset project

@@ -1,0 +1,63 @@
+
+version: "3.1"
+
+rules:
+
+
+
+
+# -----------------------------------------
+# geo fence problem
+
+- rule: Start Geo Fencing Flow
+  condition:
+    - slot_was_set:
+        - project: panchayat
+  steps:
+    - intent: geo_fence
+    - action: utter_geo_fence
+
+
+- rule: geo problem - No project selected
+  condition:
+    - slot_was_set:
+        - project: null
+  steps:
+    - intent: geo_fence
+    - action: utter_ask_project
+
+- rule: geo problem - other project selected
+  condition:
+    - slot_was_set:
+        - project: ims
+  steps:
+    - intent: geo_fence
+    - action: utter_project_mismatch
+
+
+- rule: User is inside Panchayat Bhawan
+  steps:
+    - intent: affirm
+    - action: utter_inside_yes
+
+
+- rule: Problem Solved
+  steps:
+    - intent: problem_solved
+    - action: utter_thanks
+
+
+
+- rule: Problem not solved
+  steps:
+    - intent: problem_not_solved
+    - action: utter_update_data
+    - action: utter_thanks
+
+
+
+- rule: User outside Panchayat Bhawan
+  steps:
+    - intent: deny
+    - action: utter_inside_no
+    - action: utter_thanks

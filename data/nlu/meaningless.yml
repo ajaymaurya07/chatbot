@@ -1,0 +1,61 @@
+
+version: "3.1"
+nlu:
+
+
+
+- intent: meaningless_input
+  examples: |
+    - llllll
+    - asdasd
+    - asdfgh
+    - asdfasdf
+    - dndn
+    - djdjdj
+    - sjsjjsj
+    - kjhkjh
+    - jdjdd
+    - hhhh
+    - hhhhhhh
+    - nknknkn
+    - zxczxc
+    - qwerty
+    - poiuyt
+    - mnbvcx
+    - kdfjghdf
+    - kjdfhgdfg
+    - ghghghgh
+    - jskajskaj
+    - testtesttest
+    - #$#$#$#
+    - ##$$
+    - @@@@@
+    - !!!!!!
+    - ????
+    - %%%%%%
+    - @#$@#$@#
+    - ........
+    - ;;;;;
+    - random
+    - gibberish
+    - nonsense
+    - blahblah
+    - blah blah
+    - ajksnjkas
+    - kjashdkjashd
+    - ajshdjkashdja
+    - lorem ipsum
+    - dsfsdfsdf
+    - skjdfhsdkfj
+    - jfhgjdfhg
+    - blahblahblah
+    - gibberish text
+    - whatttttt???
+    - whaaaat????
+    - yyyyyy
+    - ooooooo
+    - uuuuuuuuuu
+    - zzzzzzzz
+    - dhdfhdfh
+    - fjfjfjfj
+    - kjkjkjkj

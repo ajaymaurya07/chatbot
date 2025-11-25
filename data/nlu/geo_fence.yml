@@ -1,0 +1,20 @@
+
+
+version: "3.1"
+nlu:
+
+
+- intent: geo_fence
+  examples: |
+    - geo fencing problem
+    - geofence problem
+    - my app shows geo fencing issue
+    - geofencing issue
+    - geo fencing issue
+    - geo-fencing issue
+    - geo fence me problem
+    - geo fence me dikkat h
+    - geo fence me issue hai
+    - geo fence error in app
+    - geo fencing not working
+    - जियो फेंस में समस्या है

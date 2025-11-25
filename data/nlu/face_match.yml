@@ -1,0 +1,24 @@
+version: "3.1"
+nlu:
+
+
+- intent: ask_face_match
+  examples: |
+    - face not match
+    - my face is not matching
+    - face mismatch
+    - face did not match
+    - face doesn’t match
+    - face detection failed
+    - face authentication failed
+    - face recognition not working
+    - my face is not detected
+    - face not recognized
+    - face verification failed
+    - face not verified
+    - my face didn’t match the record
+    - face not accepted
+    - chehra match nhi kar rha h
+    - चेहरा मेल नहीं खाता
+    - चेहरा मैच नहीं कर रहा है
+    - फेस नॉट मैच

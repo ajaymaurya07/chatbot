@@ -1,0 +1,41 @@
+version: "3.1"
+
+rules:
+
+#-----------------------------------------------------------------------
+# qr problem geo panchayat gateway
+
+- rule: qr issue
+  condition:
+    - slot_was_set:
+        - project: panchayat
+  steps:
+    - intent: ask_qr
+    - action: utter_ask_qr
+
+- rule: qr issue when no project select
+  condition:
+    - slot_was_set:
+        - project: null
+  steps:
+    - intent: ask_qr
+    - action: utter_ask_project
+
+- rule: qr not allowed when project is not panchayat
+  condition:
+    - slot_was_set:
+        - project: ims
+  steps:
+    - intent: ask_qr
+    - action: utter_project_mismatch
+
+
+- rule: qr show
+  steps:
+    - intent: qr_show
+    - action: utter_qr_show
+
+- rule: qr not show
+  steps:
+    - intent: qr_not_show
+    - action: utter_qr_not_show

@@ -1,0 +1,31 @@
+version: "3.1"
+
+rules:
+
+
+#--------------------------------------------------------------------------
+# network problem
+
+- rule: ask network problem in panchayat gateway
+  condition:
+    - slot_was_set:
+        - project: panchayat
+  steps:
+    - intent: ask_network_issue
+    - action: action_ask_network_issue
+
+- rule: ask network problem if project null
+  condition:
+    - slot_was_set:
+        - project: null
+  steps:
+    - intent: ask_network_issue
+    - action: utter_ask_project
+
+- rule: ask network problem if project other
+  condition:
+    - slot_was_set:
+        - project: ims
+  steps:
+    - intent: ask_network_issue
+    - action: utter_project_mismatch

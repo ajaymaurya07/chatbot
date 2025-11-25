@@ -1,0 +1,37 @@
+
+version: "3.1"
+nlu:
+
+
+- intent: greet
+  examples: |
+    - hello
+    - hi
+    - hey
+    - good morning
+    - good evening
+    - good afternoon
+    - greetings
+    - hello there
+    - hey bot
+    - hi assistant
+    
+    
+
+# Gratitude
+- intent: thank
+  examples: |
+    - thank you
+    - thanks
+    - appreciate it
+    - that’s helpful
+    - thank you so much
+    - thanks a lot
+    - dhanyabad
+    
+
+- intent: goodbye
+  examples: |
+    - bye
+    - धन्यवाद
+    - अलविदा

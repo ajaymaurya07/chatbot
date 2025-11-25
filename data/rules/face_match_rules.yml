@@ -1,0 +1,61 @@
+
+version: "3.1"
+
+rules:
+
+
+# -----------------------------------------
+# Ask face match flow
+
+- rule: Ask face match (only when panchayat project selected)
+  condition:
+    - slot_was_set:
+        - project: panchayat
+  steps:
+    - intent: ask_face_match
+    - action: utter_ask_face_match
+
+
+- rule: Ask face match if project not select
+  condition:
+    - slot_was_set:
+        - project: null
+  steps:
+    - intent: ask_face_match
+    - action: utter_ask_project
+
+
+- rule: Ask face match if project not select related
+  condition:
+    - slot_was_set:
+        - project: ims
+  steps:
+    - intent: ask_face_match
+    - action: utter_project_mismatch
+
+
+- rule: Image is showing
+  steps:
+    - intent: image_show
+    - action: utter_image_show
+
+
+- rule: Image not showing
+  steps:
+    - intent: image_not_show
+    - action: utter_image_not_show
+    - action: utter_thanks
+
+
+- rule: Face match success (status 1)
+  steps:
+    - intent: face_status_1
+    - action: utter_face_status_1
+    - action: utter_thanks
+
+
+- rule: Face match failed (status 0)
+  steps:
+    - intent: face_status_0
+    - action: utter_face_status_0
+    - action: utter_thanks
