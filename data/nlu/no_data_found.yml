@@ -1,0 +1,11 @@
+
+
+version: "3.1"
+nlu:
+
+
+- intent: no_data_found
+  examples: |
+    - no data found for given panchayat
+    - no data found given panchayat
+    - दिए गए पंचायत के लिए कोई डेटा नहीं मिला

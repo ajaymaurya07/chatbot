@@ -52,8 +52,21 @@ rules:
   steps:
     - intent: problem_not_solved
     - action: utter_update_data
+
+
+- rule: yes i did payment
+  steps:
+    - intent: i_did
+    - action: utter_i_did
     - action: utter_thanks
 
+
+
+- rule: ni, i did payment
+  steps:
+    - intent: i_not_did
+    - action: utter_i_not_did
+    - action: utter_thanks
 
 
 - rule: User outside Panchayat Bhawan

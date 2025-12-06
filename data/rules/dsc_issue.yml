@@ -1,0 +1,32 @@
+
+
+version: "3.1"
+
+rules:
+
+#-----------------------------------------------------------------------
+# qr problem geo panchayat gateway
+
+- rule: dsc issue
+  condition:
+    - slot_was_set:
+        - project: panchayat
+  steps:
+    - intent: dsc_issue
+    - action: utter_dsc_issue
+
+- rule: dsc issue when no project select
+  condition:
+    - slot_was_set:
+        - project: null
+  steps:
+    - intent: dsc_issue
+    - action: utter_ask_project
+
+- rule: dsc issue when project is not panchayat
+  condition:
+    - slot_was_set:
+        - project: ims
+  steps:
+    - intent: dsc_issue
+    - action: utter_project_mismatch

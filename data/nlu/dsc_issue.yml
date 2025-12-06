@@ -1,0 +1,13 @@
+
+
+version: "3.1"
+nlu:
+
+
+- intent: dsc_issue
+  examples: |
+    - DSC Not found
+    - dsc error
+    - dsc issue
+    - dsc issue mil rahal ba
+    - DSC नहीं मिला

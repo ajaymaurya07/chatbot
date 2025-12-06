@@ -1,0 +1,30 @@
+version: "3.1"
+
+rules:
+
+#-----------------------------------------------------------------------
+# qr problem geo panchayat gateway
+
+- rule: no data found
+  condition:
+    - slot_was_set:
+        - project: panchayat
+  steps:
+    - intent: no_data_found
+    - action: utter_no_data_found
+
+- rule: no data found when no project select
+  condition:
+    - slot_was_set:
+        - project: null
+  steps:
+    - intent: no_data_found
+    - action: utter_ask_project
+
+- rule: no data found when project is not panchayat
+  condition:
+    - slot_was_set:
+        - project: ims
+  steps:
+    - intent: no_data_found
+    - action: utter_project_mismatch

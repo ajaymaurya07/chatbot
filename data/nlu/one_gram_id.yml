@@ -1,0 +1,12 @@
+
+
+version: "3.1"
+nlu:
+
+
+- intent: one_gram_id
+  examples: |
+    - only one gram sachivalay id allowed on one machine
+    - only 1 gram sachivalay id allowed on 1 machine
+    - one gram sachivalay id allowed on 1 machine
+    - केवल एक मशीन पर केवल एक ग्राम सचिवालय आईडी की अनुमति है
