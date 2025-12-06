@@ -1,0 +1,6 @@
+actions:
+  - action_set_project
+  - action_reset_project
+  - action_ask_network_issue
+  - action_provide_user_id
+  - action_start_forget_password

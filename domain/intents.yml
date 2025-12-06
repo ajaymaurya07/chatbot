@@ -1,0 +1,37 @@
+intents:
+  - greet
+  - goodbye
+  - switch_project
+  - reset_project
+  - forget_password
+  - provide_user_id
+  - one_gram_id
+  - dsc_issue
+  - no_data_found
+  - i_not_did
+  - i_did
+
+  #  geo fence problem panchayat gateway
+  - geo_fence
+  - affirm
+  - deny
+  - problem_solved
+  - problem_not_solved
+
+  #  face match or not
+  - ask_face_match
+  - image_show
+  - image_not_show
+  - face_status_1
+  - face_status_0
+
+  #  network problem
+  - ask_network_issue
+
+  #  qr
+  - ask_qr
+  - qr_show
+  - qr_not_show
+
+  - meaningless_input
+  - thank

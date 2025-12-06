@@ -1,0 +1,23 @@
+slots:
+  project:
+    type: categorical
+    values:
+      - panchayat
+      - ims
+    influence_conversation: true
+    initial_value: null
+    mappings:
+      - type: custom
+
+  user_id:
+    type: text
+    influence_conversation: false
+    mappings:
+      - type: custom
+
+  flow:
+    type: text
+    influence_conversation: false
+    initial_value: null
+    mappings:
+      - type: custom

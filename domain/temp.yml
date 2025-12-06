@@ -1,0 +1,247 @@
+#version: "3.1"
+#
+#session_config:
+#  session_expiration_time: 60
+#  carry_over_slots_to_new_session: true
+#
+#slots:
+#  project:
+#    type: categorical  #यह slot सिर्फ list में दिए गए values को ही accept करेगा।
+#    values:
+#      - panchayat
+#      - ims
+#    influence_conversation: true
+#    initial_value: null
+#    mappings:
+#      - type: custom   #यह slot entity से खुद fill नहीं होगा,इसे manually action से fill करना पड़ेगा।
+#
+#  user_id:
+#    type: text  #slot text value store करेगा
+#    influence_conversation: false
+#    mappings:
+#      - type: custom        # ← REQUIRED to avoid error
+#
+#  flow:
+#      type: text
+#      influence_conversation: false
+#      initial_value: null
+#      mappings:
+#        - type: custom        # ← REQUIRED to avoid error
+#
+#
+#intents:
+#  - greet
+#  - goodbye
+#  - switch_project
+#  - reset_project
+#  - forget_password
+#  - provide_user_id
+#  - one_gram_id
+#  - dsc_issue
+#  - no_data_found
+#  - i_not_did
+#  - i_did
+#
+#  #  geo fence problem panchayat gateway
+#  - geo_fence
+#  - affirm
+#  - deny
+#  - problem_solved
+#  - problem_not_solved
+#
+#  #  face match or not
+#  - ask_face_match
+#  - image_show
+#  - image_not_show
+#  - face_status_1
+#  - face_status_0
+#
+#  #  network problem
+#  - ask_network_issue
+#
+#  #  qr
+#  - ask_qr
+#  - qr_show
+#  - qr_not_show
+#
+#  - meaningless_input
+#  - thank
+#
+#responses:
+#
+#  utter_greet:
+#    - text: "Hello! how can I help you with?
+#    \nनमस्ते! मैं आपकी कैसे मदद कर सकता हूँ?"
+#
+#  utter_ask_project:
+#    - text: |
+#        Which of the projects listed below do you want to talk about? Please enter the project name.
+#        निचे दिए गए किस प्रोजेक्ट के बारे में बात करना चाहते हो? कृपया प्रोजेक्ट का नाम दर्ज करें।
+#        • पंचायत गेटवे (Panchayat Gateway)
+#        • IMS (Inventory Management)
+#
+#  utter_project_set:
+#    - text: "Okay! how can I help you with the {project} project?.
+#    \nठीक है! मैं {project} प्रोजेक्ट में आपकी कैसे मदद कर सकता हूँ?"
+#
+#  utter_project_locked:
+#    - text: |
+#        You have already chosen the {project} project.
+#        To choose a new project, first type 'reset project'.
+#        आपने पहले ही {project} प्रोजेक्ट चुन लिया है।
+#        नया प्रोजेक्ट चुनने के लिए पहले “reset project" लिखें।
+#
+#  utter_project_reset:
+#    - text: |
+#        The project has been reset. Please specify a new project.
+#        प्रोजेक्ट reset कर दिया गया है। कृपया नया project बताएँ।
+#
+#  utter_project_mismatch:
+#    - text: |
+#        Ask questions relevant to the project.
+#        प्रोजेक्ट से संबंधित प्रश्न पूछें.
+#
+#
+#  # Forget Password
+#  utter_enter_user_id:
+#    - text: |
+#        Enter user id
+#        यूज़र आईडी दर्ज करें
+#
+#  utter_forget_password_ims:
+#    - text: |
+#        IMS पासवर्ड reset:
+#        Login → Forgot Password
+#
+#  utter_geo_fence:
+#      - text: "Are you inside Panchayat Bhawan?
+#      \nक्या आप पंचायत भवन के अंदर हैं?"
+#        buttons:
+#          - title: "हाँ/Yes"
+#            payload: "/affirm"
+#          - title: "नहीं/No"
+#            payload: "/deny"
+#
+#  utter_inside_yes:
+#    - text: "Please close the app and retry again!
+#    \nकृपया ऐप को बंद करें और फिर से प्रयास करें!"
+#      buttons:
+#        - title: "समस्या हल हो गया है?/Problem solved?"
+#          payload: "/problem_solved"
+#        - title: "समस्या हल नहीं हो गया है?/Problem Not Solved?"
+#          payload: "/problem_not_solved"
+#
+#  utter_inside_no:
+#    - text: "This app works only inside Panchayat Bhawan. Please go there to use it!
+#    \nयह ऐप केवल पंचायत भवन के अंदर ही काम करता है। कृपया इसे इस्तेमाल करने के लिए वहां जाएँ!"
+#
+#  utter_update_data:
+#    - text: |
+#        Was a payment made at this location through the app before or not?
+#        क्या इस लोकेशन पर पहले ऐप के जरिए पेमेंट किया था या नहीं?
+#      buttons:
+#        - title: "Yes"
+#          payload: "/i_did"
+#        - title: "No"
+#          payload: "/i_not_did"
+#
+#
+#  utter_i_not_did:
+#    - text: |
+#        first update your location in the FRS app. After updating in the App (Secretary Login), the DPM will approve the location within 30 minutes.
+#        सबसे पहले अपना स्थान FRS ऐप में अपडेट करें। ऐप (सचिव लॉगिन) में अपडेट करने के बाद, DPM 30 मिनट के भीतर स्थान को स्वीकृत कर देगा।
+#
+#  utter_i_did:
+#    - text: |
+#        write a letter to the DPRO explaining why you are changing the location. The DPRO will send this letter to the Panchayat Raj Directorate. The location will be reset; update your location in the FRS app. After updating, the DPM will approve the location.
+#        DPRO को एक पत्र लिखें और उन्हें बताएं कि आप स्थान क्यों बदल रहे हैं। DPRO यह पत्र Panchayat Raj Directorate को भेजेगा। स्थान रीसेट किया जाएगा; FRS ऐप में अपना स्थान अपडेट करें। अपडेट करने के बाद, DPM स्थान को अनुमोदित करेगा।
+#
+#
+#
+#  utter_ask_face_match:
+#    - text:
+#        "Let's verify if your face is registered in the app.\nOpen the app and tap the circular box.If you see your image there, it means your face is registered.
+#          \nचलिए जाँच करते हैं कि आपका चेहरा ऐप में पंजीकृत है या नहीं?\nऐप खोलें और गोल बॉक्स पर टैप करें।अगर वहाँ आपका चित्र दिखाई देता है, तो इसका मतलब है कि आपका चेहरा पंजीकृत है।"
+#      buttons:
+#        - title: "चेहरा दिखाई दे रहा है / Face is showing"
+#          payload: "/image_show"
+#        - title: "चेहरा नहीं दिख रहा / Face not showing"
+#          payload: "/image_not_show"
+#
+#  utter_image_show:
+#    - text: "Great! 😊 Now let’s check your face verification status.\nInside the app, open the same circular box — do you see any number or status data there?
+#     \nबहुत बढ़िया! 😊 अब चलिए आपके फेस वेरिफिकेशन की स्थिति देखते हैं।
+#     \nएप के अंदर, वही वृत्ताकार बॉक्स खोलें — क्या आप वहां कोई संख्या या स्थिति डेटा देख पा रहे हैं?"
+#      buttons:
+#        - title: "चेहरे की स्थिति 1 है/face status is 1"
+#          payload: "/face_status_1"
+#        - title: "चेहरे की स्थिति 0 है/Face status is 0"
+#          payload: "/face_status_0"
+#
+#  utter_face_status_1:
+#    - text: "Perfect! That means your face data is active and detected.\nIf the app still shows a mismatch or 'face not recognized',
+#     please close the app and retry again under proper lighting.
+#     \nसही है! इसका मतलब है कि आपका चेहरे का डेटा सक्रिय है और पहचाना गया है।\nअगर ऐप अभी भी मेल नहीं खाता या 'चेहरा पहचाना नहीं गया' दिखाता है, तो कृपया ऐप बंद करें और उचित रोशनी में पुनः प्रयास करें।"
+#
+#  utter_face_status_0:
+#    - text: "Please contact your District Program Manager (DPM) to re-register your face under proper lighting.
+#    \nकृपया उचित प्रकाश व्यवस्था में अपना चेहरा फिर से पंजीकृत कराने के लिए अपने जिला कार्यक्रम प्रबंधक (DPM) से संपर्क करें।"
+#
+#  utter_image_not_show:
+#    - text: "Hmm, it seems your face is not registered. \nPlease reach out to your District Program Manager (DPM) to get your face registered.
+#    \nहम्म, लगता है आपका चेहरा पंजीकृत नहीं है।\nकृपया अपना चेहरा पंजीकृत कराने के लिए अपने जिला कार्यक्रम प्रबंधक (DPM) से संपर्क करें।"
+#
+#  utter_ask_qr:
+#    - text: "Can you see the QR code on your system?\nक्या सिस्टम पर QR कोड दिख रहा है?"
+#      buttons:
+#        - title: "हिखाई दे रहा है/it's visible"
+#          payload: "/qr_show"
+#        - title: "नहीं दिखाई दे रहा है/it's not visible"
+#          payload: "/qr_not_show"
+#
+#  utter_qr_show:
+#    - text: "Great!Now, please open the app and go to the QR Scan page.\nMake sure to scan the complete QR code from a proper distance — not too close and not too far.
+#    \n👉 Scanning under good lighting will give the best results.\nबहुत बढ़िया! अब कृपया ऐप खोलें और QR स्कैन पेज पर जाएं।
+#    सुनिश्चित करें कि आप पूरी QR कोड को सही दूरी से स्कैन करें — ना बहुत पास और ना बहुत दूर।
+#    \n👉 अच्छी रोशनी में स्कैन करने पर सबसे अच्छे परिणाम मिलेंगे।"
+#
+#  utter_qr_not_show:
+#    - text: "Hmm... it seems the QR code is not visible right now.\nPlease ensure that a valid QR code appears on your system.\nIf not, refresh the page or reopen the app and try again.
+#    \nहम्म... लगता है कि अभी QR कोड दिखाई नहीं दे रहा है। कृपया सुनिश्चित करें कि आपके सिस्टम पर एक वैध QR कोड दिखाई दे।यदि नहीं, तो पेज को रिफ्रेश करें या ऐप को फिर से खोलें और फिर से कोशिश करें।"
+#
+#
+#  utter_meaningless_input:
+#    - text: "Your message looks unclear.  Please type your question again clearly.\nOops! आपका संदेश थोड़ा अस्पष्ट लग रहा है 😊 कृपया अपना सवाल दोबारा साफ़-साफ़ लिखें।  "
+#
+#  utter_thanks:
+#    - text: "You're welcome! Feel free to ask if you need any further assistance.\nआपका स्वागत है! अगर आपको और किसी सहायता की ज़रूरत हो तो बेझिझक पूछें।"
+#
+#
+#  utter_one_gram_id:
+#    - text: |
+#        The Gram sachivalaya portal uses a security mechanism that allows a Gram Secretariat ID to be used on only one machine. This issue can be manually resolved using Windows PowerShell.
+#        ग्राम सचिवालय पोर्टल एक सुरक्षा तंत्र का उपयोग करता है जिसे केवल एक ग्राम सचिवालय आईडी को एक मशीन पर अनुमति दी जाती है। इस समस्या को Windows PowerShell का उपयोग करके मैन्युअल रूप से हल किया जा सकता है।
+#
+#
+#
+#  utter_dsc_issue:
+#    - text: |
+#        1) Check expired antivirus
+#           समाप्त हो चुके एंटीवायरस की जाँच करें !
+#        2) DSC Login in DSC software
+#           DSC सॉफ़्टवेयर में DSC लॉगिन
+#
+#
+#  utter_no_data_found:
+#    - text: |
+#        Update photo of concderned person update on FRS app (Sachiv Login) again. If update option not avilable concern DPM for recject old photo
+#        FRS ऐप (सचिव लॉगिन) पर संबंधित व्यक्ति की फोटो को फिर से अपडेट करें। यदि अपडेट का विकल्प उपलब्ध नहीं है, तो पुरानी फोटो अस्वीकार करने के लिए संबंधित DPM से संपर्क करें।
+#
+#
+#
+#actions:
+#  - action_set_project
+#  - action_reset_project
+#  - action_ask_network_issue
+#  - action_provide_user_id
+#  - action_start_forget_password
